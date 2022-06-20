@@ -13,7 +13,7 @@ int main()
     float rey, hblt, tblt, cf, avgcf, shear, drag, nussavg, nussx, hx, q;
 
     cout << "Hello\n";
-    cout << "To evaluate a problem using fundamentals of convection, input parameters\n";
+    cout << "To evaluate a problem using fundamentals of convection, input parameters in SI unit. \n";
     cout << "Enter the type of fluid : ";
     cin >> fluid;
     cout << "Enter the width of the plate : ";
@@ -36,14 +36,14 @@ int main()
     cin >> v;
     cout << "Enter the density of the " << fluid << " : ";
     cin >> density;
-    cout << "Enter the kinematic viscosity of the " << fluid << " : ";
+    cout << "Enter the kinematic viscosity of the " << fluid << " (in terms of 10^(-6)) : ";
     cin >> kv;
     cout << "Enter the Prandlt number of the " << fluid << " : ";
     cin >> pr;
     cout << "Enter the thermal conductivity of the " << fluid << " : ";
     cin >> k;
-    rey = (v * x) / (kv);
-    cout << "Value of rey for " << fluid << " is " << rey << " : ";
+    rey = (v * x) / (kv * 0.000001);
+    cout << "Value of rey for " << fluid << " is " << rey << " : \n";
     if (rey <= 500000)
     {
         cout << "The flow is LAMINAR ";
@@ -66,23 +66,23 @@ int main()
     nussavg = 2 * nussx;
     shear = cf * density * v * v * 0.5;
 
-    a = l * width;
-    drag = shear / a;
+    a = x * width;
+    drag = shear * a;
 
-    hx = (nussx * k) / l;
+    hx = (nussx * k) / x;
     h = 2 * hx;
     q = h * a * (ts - ti);
-
-    cout << "\n 1) The hydrodynamic boundary layer thickness at distance x from leading edge is " << hblt;
-    cout << "\n 2) The thermal boundary layer thickness at a distance of x from leading edge is " << tblt;
+    cout << "\n \n";
+    cout << "\n 1) The hydrodynamic boundary layer thickness at distance x from leading edge is " << hblt << " m.";
+    cout << "\n 2) The thermal boundary layer thickness at a distance of x from leading edge is " << tblt << " m.";
     cout << "\n 3) Heat loss Q : " << q << "watts";
-    cout << "\n 2) Drag force Fd : " << drag;
-    cout << "\n 5) Shear force : " << shear;
+    cout << "\n 4) Drag force Fd : " << drag << " N";
+    cout << "\n 5) Shear stress : " << shear << " N/m^2";
     cout << "\n 6) Cf :" << cf;
     cout << "\n 7) Average Cf : " << avgcf;
     cout << "\n 8) nx : " << nussx;
     cout << "\n 9) Average nx : " << nussavg;
-    cout << "\n 10) average Heat Co-efficient : " << h;
+    cout << "\n 10) average Heat Co-efficient : " << h << " W/(m^2*K)";
     cout << "\n \n";
     return 0;
 }
